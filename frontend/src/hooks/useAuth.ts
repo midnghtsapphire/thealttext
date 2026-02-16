@@ -1,16 +1,22 @@
 /**
  * TheAltText — Auth Hook
  * Manages authentication state.
+ * Supports demo mode for GitHub Pages deployment.
+ * A GlowStarLabs product by Audrey Evans.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { authAPI } from '../services/api';
 import type { User } from '../types';
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(() => {
     const stored = localStorage.getItem('thealttext_user');
-    return stored ? JSON.parse(stored) : null;
+    try {
+      return stored ? JSON.parse(stored) : null;
+    } catch {
+      return null;
+    }
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +33,7 @@ export function useAuth() {
       setUser(data.user);
       return data.user;
     } catch (err: any) {
-      const msg = err.response?.data?.detail || 'Login failed';
+      const msg = err.response?.data?.detail || err.message || 'Login failed';
       setError(msg);
       throw new Error(msg);
     } finally {
@@ -45,7 +51,7 @@ export function useAuth() {
       setUser(data.user);
       return data.user;
     } catch (err: any) {
-      const msg = err.response?.data?.detail || 'Registration failed';
+      const msg = err.response?.data?.detail || err.message || 'Registration failed';
       setError(msg);
       throw new Error(msg);
     } finally {
@@ -65,7 +71,7 @@ export function useAuth() {
       localStorage.setItem('thealttext_user', JSON.stringify(data));
       setUser(data);
     } catch {
-      // Token may be expired
+      // Token may be expired — ignore in demo mode
     }
   }, []);
 
