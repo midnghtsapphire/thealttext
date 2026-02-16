@@ -1,0 +1,216 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── TheAltText — Warm Earthy Dark Theme ──────────────────────────────── */
+/* NO blue light. Warm reds, forest greens, golds, earthy charcoal.       */
+/* Glassmorphism UI with WCAG AAA accessibility.                          */
+/* Neurodivergent-friendly: clean layout, no sensory overload.            */
+
+@layer base {
+  :root {
+    --color-bg: #0a0908;
+    --color-surface: #1e1a18;
+    --color-surface-elevated: #2c2622;
+    --color-border: rgba(176, 125, 58, 0.15);
+    --color-text-primary: #f5ead6;
+    --color-text-secondary: #b8b0a5;
+    --color-accent-gold: #d4b880;
+    --color-accent-green: #7ab87a;
+    --color-accent-red: #c46356;
+    --color-accent-ember: #b0443a;
+    --glass-bg: rgba(30, 26, 24, 0.7);
+    --glass-border: rgba(176, 125, 58, 0.12);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent-gold) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(176, 125, 58, 0.3);
+    border-radius: 3px;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-border: rgba(176, 125, 58, 0.4);
+      --glass-border: rgba(176, 125, 58, 0.3);
+    }
+  }
+
+  /* Focus styles for keyboard navigation — WCAG AAA */
+  *:focus-visible {
+    outline: 3px solid var(--color-accent-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Glassmorphism panel */
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-panel-hover {
+    @apply glass-panel transition-all duration-300;
+  }
+
+  .glass-panel-hover:hover {
+    border-color: rgba(176, 125, 58, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(176, 125, 58, 0.1);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+    background: linear-gradient(135deg, #b07d3a, #967820);
+    color: #1e1a18;
+    box-shadow: 0 4px 14px rgba(176, 125, 58, 0.3);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #c49a56, #b09028);
+    box-shadow: 0 6px 20px rgba(176, 125, 58, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+    background: rgba(176, 125, 58, 0.1);
+    border: 1px solid rgba(176, 125, 58, 0.2);
+    color: var(--color-accent-gold);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(176, 125, 58, 0.2);
+    border-color: rgba(176, 125, 58, 0.3);
+  }
+
+  .btn-forest {
+    @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+    background: linear-gradient(135deg, #3a7d3a, #2e632e);
+    color: #f0f7f0;
+    box-shadow: 0 4px 14px rgba(58, 125, 58, 0.3);
+  }
+
+  .btn-forest:hover {
+    background: linear-gradient(135deg, #4f9e4f, #3a7d3a);
+    box-shadow: 0 6px 20px rgba(58, 125, 58, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Input fields */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl transition-all duration-200;
+    background: rgba(30, 26, 24, 0.6);
+    border: 1px solid rgba(176, 125, 58, 0.15);
+    color: var(--color-text-primary);
+  }
+
+  .input-field::placeholder {
+    color: var(--color-text-secondary);
+  }
+
+  .input-field:focus {
+    border-color: var(--color-accent-gold);
+    box-shadow: 0 0 0 3px rgba(176, 125, 58, 0.15);
+  }
+
+  /* Cards */
+  .stat-card {
+    @apply glass-panel p-6 flex flex-col gap-2;
+  }
+
+  /* Skip to content link for screen readers */
+  .skip-link {
+    @apply absolute -top-10 left-4 z-50 px-4 py-2 rounded-lg;
+    background: var(--color-accent-gold);
+    color: var(--color-bg);
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus {
+    top: 4px;
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #d4b880, #b07d3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-forest {
+    background: linear-gradient(135deg, #7ab87a, #3a7d3a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-ember {
+    background: linear-gradient(135deg, #c46356, #b0443a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-mesh {
+    background-image:
+      radial-gradient(at 20% 20%, rgba(176, 125, 58, 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, rgba(58, 125, 58, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(176, 68, 58, 0.03) 0px, transparent 50%);
+  }
+}

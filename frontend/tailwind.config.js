@@ -1,0 +1,98 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        // Warm earthy dark theme — NO blue light
+        earth: {
+          50: '#fdf8f0',
+          100: '#f5ead6',
+          200: '#e8d5b0',
+          300: '#d4b880',
+          400: '#c49a56',
+          500: '#b07d3a',
+          600: '#96632e',
+          700: '#7a4d26',
+          800: '#5e3a1e',
+          900: '#3d2613',
+          950: '#1f1309',
+        },
+        forest: {
+          50: '#f0f7f0',
+          100: '#d4e8d4',
+          200: '#a8d1a8',
+          300: '#7ab87a',
+          400: '#4f9e4f',
+          500: '#3a7d3a',
+          600: '#2e632e',
+          700: '#264d26',
+          800: '#1e3a1e',
+          900: '#132613',
+          950: '#0a1a0a',
+        },
+        ember: {
+          50: '#fdf2f0',
+          100: '#f5d6d0',
+          200: '#e8afa5',
+          300: '#d4877a',
+          400: '#c46356',
+          500: '#b0443a',
+          600: '#96342e',
+          700: '#7a2826',
+          800: '#5e1e1e',
+          900: '#3d1313',
+          950: '#1f0909',
+        },
+        gold: {
+          50: '#fdf8e8',
+          100: '#f5ecc0',
+          200: '#e8d88a',
+          300: '#d4c05a',
+          400: '#c4a83a',
+          500: '#b09028',
+          600: '#967820',
+          700: '#7a6018',
+          800: '#5e4812',
+          900: '#3d300c',
+          950: '#1f1806',
+        },
+        charcoal: {
+          50: '#f5f3f0',
+          100: '#e0dbd4',
+          200: '#b8b0a5',
+          300: '#908578',
+          400: '#6b5f52',
+          500: '#4a4038',
+          600: '#3a322c',
+          700: '#2c2622',
+          800: '#1e1a18',
+          900: '#141210',
+          950: '#0a0908',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
+      animation: {
+        'glow': 'glow 2s ease-in-out infinite alternate',
+        'float': 'float 6s ease-in-out infinite',
+      },
+      keyframes: {
+        glow: {
+          '0%': { boxShadow: '0 0 5px rgba(176, 125, 58, 0.2)' },
+          '100%': { boxShadow: '0 0 20px rgba(176, 125, 58, 0.4)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+      },
+    },
+  },
+  plugins: [],
+};

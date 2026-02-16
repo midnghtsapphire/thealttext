@@ -1,0 +1,7 @@
+/* TheAltText Extension — Content Script Styles */
+/* Minimal footprint to avoid interfering with host pages */
+
+[data-thealttext-missing="true"] {
+  outline: 3px solid #c46356 !important;
+  outline-offset: 2px !important;
+}

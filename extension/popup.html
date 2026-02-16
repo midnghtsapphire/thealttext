@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheAltText Extension</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 320px; padding: 20px;
+      background: #0a0908; color: #f5ead6;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    .header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+    .logo {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: linear-gradient(135deg, #b07d3a, #3a7d3a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: bold; color: #0a0908;
+    }
+    .title { font-size: 16px; font-weight: 700; background: linear-gradient(135deg, #d4b880, #b07d3a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    label { display: block; font-size: 12px; color: #b8b0a5; margin-bottom: 4px; margin-top: 12px; }
+    input {
+      width: 100%; padding: 8px 12px; border-radius: 8px;
+      background: rgba(30,26,24,0.6); border: 1px solid rgba(176,125,58,0.15);
+      color: #f5ead6; font-size: 13px; outline: none;
+    }
+    input:focus { border-color: #d4b880; box-shadow: 0 0 0 2px rgba(176,125,58,0.15); }
+    .btn {
+      width: 100%; padding: 10px; border-radius: 10px; border: none;
+      font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 16px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: linear-gradient(135deg, #b07d3a, #967820); color: #1e1a18; }
+    .btn-primary:hover { background: linear-gradient(135deg, #c49a56, #b09028); }
+    .btn-scan { background: linear-gradient(135deg, #3a7d3a, #2e632e); color: #f0f7f0; }
+    .btn-scan:hover { background: linear-gradient(135deg, #4f9e4f, #3a7d3a); }
+    .status { margin-top: 12px; font-size: 12px; color: #7ab87a; text-align: center; }
+    .footer { margin-top: 16px; text-align: center; font-size: 11px; color: #6b5f52; }
+    .footer a { color: #d4b880; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo" aria-hidden="true">AT</div>
+    <span class="title">TheAltText</span>
+  </div>
+
+  <label for="api-url">API URL</label>
+  <input id="api-url" type="url" placeholder="https://your-instance.com" aria-label="TheAltText API URL" />
+
+  <label for="api-key">API Key</label>
+  <input id="api-key" type="password" placeholder="tat_your_api_key" aria-label="Your TheAltText API key" />
+
+  <button class="btn btn-primary" id="save-btn">Save Settings</button>
+  <button class="btn btn-scan" id="scan-btn">Scan This Page</button>
+
+  <div class="status" id="status" role="status" aria-live="polite"></div>
+
+  <div class="footer">
+    <a href="https://meetaudreyevans.com" target="_blank" rel="noopener">A GlowStarLabs Product</a>
+  </div>
+
+  <script>
+    const apiUrlInput = document.getElementById('api-url');
+    const apiKeyInput = document.getElementById('api-key');
+    const saveBtn = document.getElementById('save-btn');
+    const scanBtn = document.getElementById('scan-btn');
+    const status = document.getElementById('status');
+
+    // Load saved settings
+    chrome.storage.sync.get({ apiKey: '', apiUrl: '' }, (data) => {
+      apiUrlInput.value = data.apiUrl;
+      apiKeyInput.value = data.apiKey;
+    });
+
+    saveBtn.addEventListener('click', () => {
+      chrome.storage.sync.set({
+        apiUrl: apiUrlInput.value.replace(/\/$/, ''),
+        apiKey: apiKeyInput.value,
+      }, () => {
+        status.textContent = 'Settings saved!';
+        setTimeout(() => status.textContent = '', 3000);
+      });
+    });
+
+    scanBtn.addEventListener('click', async () => {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      chrome.tabs.sendMessage(tab.id, { type: 'SCAN_PAGE' });
+      status.textContent = 'Scanning page...';
+      setTimeout(() => status.textContent = '', 3000);
+    });
+  </script>
+</body>
+</html>
