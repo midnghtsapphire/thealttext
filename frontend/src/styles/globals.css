@@ -214,3 +214,133 @@
       radial-gradient(at 50% 50%, rgba(176, 68, 58, 0.03) 0px, transparent 50%);
   }
 }
+
+/* ── Universal Accessibility Modes ────────────────────────────────────────── */
+
+/* WCAG AAA Mode — High Contrast, Enhanced Focus */
+.high-contrast {
+  --color-bg: #000000;
+  --color-surface: #1a1a1a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e0e0e0;
+  --color-border: rgba(255, 255, 255, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.25);
+}
+
+.high-contrast *:focus-visible {
+  outline: 4px solid #ffcc00 !important;
+  outline-offset: 3px !important;
+}
+
+/* Large Text Mode */
+.large-text {
+  font-size: 18px !important;
+}
+
+.large-text h1 { font-size: 2.5rem !important; }
+.large-text h2 { font-size: 2rem !important; }
+.large-text h3 { font-size: 1.5rem !important; }
+.large-text p, .large-text span, .large-text div { font-size: 1.125rem !important; }
+.large-text button { font-size: 1.125rem !important; padding: 1rem 1.5rem !important; }
+
+/* Reduced Motion Mode */
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Dyslexic Font Mode */
+@import url('https://fonts.googleapis.com/css2?family=OpenDyslexic&display=swap');
+
+.dyslexic-font * {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+  line-height: 2 !important;
+}
+
+.dyslexic-font p, .dyslexic-font span, .dyslexic-font div {
+  text-align: left !important;
+}
+
+/* Simplified Layout Mode — For ADHD/Neurodivergent */
+.simplified-layout .glass-panel {
+  background: rgba(30, 26, 24, 0.95) !important;
+  backdrop-filter: none !important;
+}
+
+.simplified-layout [aria-hidden="true"] {
+  display: none !important;
+}
+
+.simplified-layout * {
+  border-radius: 8px !important;
+}
+
+/* ECO CODE Mode — Reduced Bandwidth & Energy */
+.eco-mode {
+  --glass-bg: rgba(30, 26, 24, 1);
+  --glass-shadow: none;
+}
+
+.eco-mode * {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.eco-mode img {
+  filter: grayscale(50%) !important;
+}
+
+.eco-mode video, .eco-mode iframe {
+  display: none !important;
+}
+
+.eco-mode::after {
+  content: "🌱 ECO MODE ACTIVE — Reduced bandwidth & energy usage";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(58, 125, 58, 0.9);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  z-index: 9999;
+}
+
+/* NEURO CODE Mode — Neurodivergent-Friendly */
+.neuro-mode {
+  --color-accent-gold: #c4a570;
+  --color-accent-green: #6a9e6a;
+  --color-accent-red: #b4534a;
+}
+
+.neuro-mode * {
+  transition-duration: 0.1s !important;
+}
+
+.neuro-mode button, .neuro-mode a, .neuro-mode input, .neuro-mode select, .neuro-mode textarea {
+  border: 2px solid rgba(176, 125, 58, 0.4) !important;
+}
+
+.neuro-mode button:hover, .neuro-mode a:hover {
+  transform: scale(1.05) !important;
+  border-color: rgba(176, 125, 58, 0.8) !important;
+}
+
+.neuro-mode .glass-panel {
+  background: rgba(30, 26, 24, 0.95) !important;
+  border: 2px solid rgba(176, 125, 58, 0.3) !important;
+}
+
+/* Focus indicators for all modes */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--color-accent-gold) !important;
+  outline-offset: 2px !important;
+}

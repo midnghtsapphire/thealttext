@@ -7,6 +7,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth';
+import { AccessibilityProvider } from './contexts/AccessibilityContext';
+import AccessibilityMenu from './components/AccessibilityMenu';
 import Layout from './components/layout/Layout';
 import LandingPage from './pages/LandingPage';
 import AuthPage from './pages/AuthPage';
@@ -29,7 +31,9 @@ export default function App() {
   const { user, isAuthenticated, login, register, logout, refreshUser } = useAuth();
 
   return (
-    <Routes>
+    <AccessibilityProvider>
+      <AccessibilityMenu />
+      <Routes>
       {/* Public routes */}
       <Route
         path="/"
@@ -140,6 +144,7 @@ export default function App() {
 
       {/* Catch-all */}
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      </Routes>
+    </AccessibilityProvider>
   );
 }

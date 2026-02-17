@@ -15,7 +15,7 @@ from fastapi.responses import JSONResponse
 
 from app.core.config import settings
 from app.core.database import init_db
-from app.api.routes import auth, images, scanner, reports, billing, dashboard, developer
+from app.api.routes import auth, images, scanner, reports, billing, dashboard, developer, blue_ocean
 
 # Configure logging
 logging.basicConfig(
@@ -92,6 +92,7 @@ app.include_router(reports.router, prefix="/api")
 app.include_router(billing.router, prefix="/api")
 app.include_router(dashboard.router, prefix="/api")
 app.include_router(developer.router, prefix="/api")
+app.include_router(blue_ocean.router, prefix="/api")
 
 
 @app.get("/", tags=["Health"])
