@@ -278,3 +278,12 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 *Built with care for accessibility, sustainability, and the open web.*
 *© 2026 Audrey Evans / GlowStarLabs. All rights reserved.*
+
+---
+
+## Test
+
+| Feature | Status |
+|---------|--------|
+| Feature | ✅ Ready |
+
