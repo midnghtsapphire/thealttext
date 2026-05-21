@@ -9,7 +9,14 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 
-client = TestClient(app)
+client = TestClient(app, raise_server_exceptions=False)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def mock_db_init():
+    """Disable startup DB initialization for API endpoint tests."""
+    with patch("app.main.init_db", new=AsyncMock(return_value=None)):
+        yield
 
 
 class TestHealthEndpoints:
