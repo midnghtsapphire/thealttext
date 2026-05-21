@@ -9,7 +9,7 @@ from pydantic import BaseModel, HttpUrl
 from datetime import datetime, timezone
 
 from app.core.database import get_db
-from app.core.auth import get_current_user
+from app.core.security import get_current_user
 from app.models.user import User
 from app.services.ecommerce_seo import generate_seo_alt_text, bulk_seo_optimize
 from app.services.platform_integrations import get_platform_integration

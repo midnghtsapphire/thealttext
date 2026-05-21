@@ -211,6 +211,16 @@ python -m pytest tests/ -v
 
 ---
 
+## Ship-to-Market Documents
+
+- [CHANGELOG.md](CHANGELOG.md)
+- [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+- [GO_TO_MARKET.md](GO_TO_MARKET.md)
+- [BRAND_GUIDELINES.md](BRAND_GUIDELINES.md)
+- [SECURITY.md](SECURITY.md)
+
+---
+
 ## Project Structure
 
 ```
@@ -286,4 +296,3 @@ MIT License — see [LICENSE](LICENSE) for details.
 | Feature | Status |
 |---------|--------|
 | Feature | ✅ Ready |
-
